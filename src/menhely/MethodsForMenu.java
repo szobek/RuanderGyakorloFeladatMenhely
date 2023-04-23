@@ -45,7 +45,7 @@ public class MethodsForMenu {
 
 			double allatSuly = 0;
 			do {
-				System.out.print("Adja meg az állat súlyát: ");
+				System.out.print("Adja meg az állat súlyát (min 2 kg): ");
 				try {
 					allatSuly = Double.parseDouble(br.readLine());
 				} catch (NumberFormatException e) {
@@ -57,7 +57,7 @@ public class MethodsForMenu {
 			if (allatTipus.equals("k")) {
 				double marmagassag = 0;
 				do {
-					System.out.print("adja meg a marmagasságot: ");
+					System.out.print("adja meg a marmagasságot (min 10cm): ");
 					try {
 						marmagassag = Double.parseDouble(br.readLine());
 					} catch (NumberFormatException e) {
