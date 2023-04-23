@@ -7,12 +7,12 @@ public class MethodsForMenu {
 
 	private BufferedReader br;
 	private Allat[] allatok;
-	private int aktualisIndex;
+	private int aktualisSzam;
 
 	public MethodsForMenu(BufferedReader br, Allat[] allatok, int aktualiIndex) {
 		this.br = br;
 		this.allatok = allatok;
-		this.aktualisIndex = aktualiIndex;
+		this.aktualisSzam = aktualiIndex;
 	}
 
 	public void selectMainMenu(String menupont) throws NumberFormatException, IOException {
@@ -25,70 +25,73 @@ public class MethodsForMenu {
 	}
 
 	private void ujAllat() throws NumberFormatException, IOException {
-		String allatTipus = "";
-		System.out.println("Kutya vagy macska? (k/m)");
-		do {
-			System.out.print("a típus: ");
-			try {
-				allatTipus = br.readLine();
-			} catch (IOException e) {
-				System.out.println("I/O hiba!");
-			}
-		} while (!allatTipus.equals("k") && !allatTipus.equals("m"));
-
-		String allatNev = "";
-		do {
-			System.out.println("Adja meg az állat nevét");
-			allatNev = br.readLine();
-		} while (allatNev.equals(""));
-
-		double allatSuly = 0;
-		do {
-			System.out.print("Adja meg az állat súlyát: ");
-			try {
-				allatSuly = Double.parseDouble(br.readLine());
-			} catch (NumberFormatException e) {
-				System.out.println("Hibás érték");
-			}
-
-		} while (allatSuly < 2);
-
-		if (allatTipus.equals("k")) {
-			double marmagassag = 0;
+		if (aktualisSzam < allatok.length) {
+			String allatTipus = "";
+			System.out.println("Kutya vagy macska? (k/m)");
 			do {
-				System.out.print("adja meg a marmagasságot: ");
+				System.out.print("a típus: ");
 				try {
-					marmagassag = Double.parseDouble(br.readLine());
+					allatTipus = br.readLine();
+				} catch (IOException e) {
+					System.out.println("I/O hiba!");
+				}
+			} while (!allatTipus.equals("k") && !allatTipus.equals("m"));
+
+			String allatNev = "";
+			do {
+				System.out.println("Adja meg az állat nevét");
+				allatNev = br.readLine();
+			} while (allatNev.equals(""));
+
+			double allatSuly = 0;
+			do {
+				System.out.print("Adja meg az állat súlyát: ");
+				try {
+					allatSuly = Double.parseDouble(br.readLine());
 				} catch (NumberFormatException e) {
 					System.out.println("Hibás érték");
 				}
 
-			} while (marmagassag < 10);
-			Allat ujAllat = new Kutya(allatNev, allatSuly, marmagassag);
-			allatok[aktualisIndex] = ujAllat;
-			successSave();
+			} while (allatSuly < 2);
+
+			if (allatTipus.equals("k")) {
+				double marmagassag = 0;
+				do {
+					System.out.print("adja meg a marmagasságot: ");
+					try {
+						marmagassag = Double.parseDouble(br.readLine());
+					} catch (NumberFormatException e) {
+						System.out.println("Hibás érték");
+					}
+
+				} while (marmagassag < 10);
+				Allat ujAllat = new Kutya(allatNev, allatSuly, marmagassag);
+				allatok[aktualisSzam] = ujAllat;
+				successSave();
+			} else {
+				String valasz = "";
+				do {
+					System.out.print("adja meg ,hogy hosszőrű-e (i/n): ");
+					valasz = br.readLine();
+
+				} while (!valasz.equals("i") && !valasz.equals("n"));
+				Allat ujAllat = new Macska(allatNev, allatSuly, (valasz.equals("i")) ? true : false);
+				allatok[aktualisSzam] = ujAllat;
+
+				successSave();
+			}
+			aktualisSzam++;
 		} else {
-			String valasz = "";
-			do {
-				System.out.print("adja meg ,hogy hosszőrű-e (i/n): ");
-				valasz = br.readLine();
-
-			} while (!valasz.equals("i") && !valasz.equals("n"));
-			Allat ujAllat = new Macska(allatNev, allatSuly, (valasz.equals("i")) ? true : false);
-			allatok[aktualisIndex] = ujAllat;
-
-			successSave();
+			System.out.println("Már nincs hely");
 		}
-		aktualisIndex++;
 	}
-	
+
 	private void successSave() {
 		System.out.println("Új állat mentve!");
 		System.out.println();
 		System.out.println();
 		System.out.println();
 
-		
 	}
 
 	private void lista() {
@@ -96,10 +99,10 @@ public class MethodsForMenu {
 		System.out.println();
 		System.out.println("Állatok listája a menhelyen");
 		for (Allat allat : allatok) {
-			if(allat !=null) {
-				System.out.println(allat.getNev());	
+			if (allat != null) {
+				System.out.println(allat.getNev());
 			}
-			
+
 		}
 		System.out.println();
 		System.out.println();
@@ -122,21 +125,22 @@ public class MethodsForMenu {
 			case "2" -> {
 				System.out.println("Almenü 2");
 			}
-		}
+			}
 		} while (!almenupont.equals("3"));
-		
+
 	}
 
 	public void removeFirst() {
-		if(aktualisIndex>=0) {
-			System.out.println(allatok[0] + " távozik");
-			for (int i = 1; i < aktualisIndex - 1; i++) {
+		if (aktualisSzam > 0) {
+			System.out.println(allatok[0].getNev() + " távozik a menhelyről!");
+
+			for (int i = 1; i <= aktualisSzam - 1; i++) {
 				allatok[i - 1] = allatok[i];
-				allatok[allatok.length - 1] = null;
-				aktualisIndex--;
-			}	
+			}
+			allatok[aktualisSzam - 1] = null;
+			aktualisSzam--;
+
 		}
-		
 
 	}
 
