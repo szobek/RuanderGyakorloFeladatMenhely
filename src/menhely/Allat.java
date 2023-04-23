@@ -1,3 +1,4 @@
+package menhely;
 
 public abstract class Allat {
 	

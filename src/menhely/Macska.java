@@ -1,3 +1,4 @@
+package menhely;
 	
 public final class Macska extends Allat {
 

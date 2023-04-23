@@ -1,3 +1,4 @@
+package menhely;
 
 public final class Kutya extends Allat {
 	private double marMagassag;
