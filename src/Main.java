@@ -6,6 +6,6 @@ public class Main {
 	static Allat[] allatok;
 	public static void main(String[] args) {
 Menu menu = new Menu();
-menu.show(br);
+menu.show(br,allatok);
 	}
 }
