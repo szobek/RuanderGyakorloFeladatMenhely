@@ -1,8 +1,8 @@
 
 public final class Kutya extends Allat {
-	private int marMagassag;
+	private double marMagassag;
 
-	public Kutya(String nev, double suly, int marMagassag) {
+	public Kutya(String nev, double suly, double marMagassag) {
 		super(nev, suly);
 		this.marMagassag = marMagassag;
 	}

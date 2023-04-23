@@ -1,4 +1,4 @@
-
+	
 public final class Macska extends Allat {
 
 	boolean hosszuszoru;
