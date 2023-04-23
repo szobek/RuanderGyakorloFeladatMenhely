@@ -66,10 +66,7 @@ public class MethodsForMenu {
 			} while (marmagassag < 10);
 			Allat ujAllat = new Kutya(allatNev, allatSuly, marmagassag);
 			allatok[aktualisIndex] = ujAllat;
-			System.out.println("Új állat mentve!");
-			System.out.println();
-			System.out.println();
-			System.out.println();
+			successSave();
 		} else {
 			String valasz = "";
 			do {
@@ -79,13 +76,19 @@ public class MethodsForMenu {
 			} while (!valasz.equals("i") && !valasz.equals("n"));
 			Allat ujAllat = new Macska(allatNev, allatSuly, (valasz.equals("i")) ? true : false);
 			allatok[aktualisIndex] = ujAllat;
-			System.out.println("Új állat mentve!");
-			System.out.println();
-			System.out.println();
-			System.out.println();
 
+			successSave();
 		}
 		aktualisIndex++;
+	}
+	
+	private void successSave() {
+		System.out.println("Új állat mentve!");
+		System.out.println();
+		System.out.println();
+		System.out.println();
+
+		
 	}
 
 	private void lista() {
@@ -104,7 +107,6 @@ public class MethodsForMenu {
 	}
 
 	private void subMenu() {
-		// TODO Auto-generated method stub
 		String almenupont = "";
 		do {
 			System.out.println("1 - Lista");
@@ -126,12 +128,15 @@ public class MethodsForMenu {
 	}
 
 	public void removeFirst() {
-		System.out.println(allatok[0] + " távozik");
-		for (int i = 1; i < aktualisIndex - 1; i++) {
-			allatok[i - 1] = allatok[i];
-			allatok[allatok.length - 1] = null;
-			aktualisIndex--;
+		if(aktualisIndex>=0) {
+			System.out.println(allatok[0] + " távozik");
+			for (int i = 1; i < aktualisIndex - 1; i++) {
+				allatok[i - 1] = allatok[i];
+				allatok[allatok.length - 1] = null;
+				aktualisIndex--;
+			}	
 		}
+		
 
 	}
 
